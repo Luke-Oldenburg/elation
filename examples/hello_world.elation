@@ -1,6 +1,18 @@
-data two 2
-data one 1
-compare two > one result
+data six 6
+data seven 7
+compare six > seven result
+print result
+calculate six + seven result
+print result
+calculate six - seven result
+print result
+calculate six * seven result
+print result
+calculate six / seven result
+print result
+calculate six % seven result
+print result
+calculate six ^ seven result
 print result
 label hello_world
 data hello Hello
