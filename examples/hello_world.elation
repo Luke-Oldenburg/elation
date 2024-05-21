@@ -14,6 +14,8 @@ calculate six % seven result
 print result
 calculate six ^ seven result
 print result
+read input
+print input
 label hello_world
 data hello Hello
 data world World

@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::env;
 use std::error::Error;
 use std::fs;
+use std::io;
 use std::process;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -9,6 +10,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let code: String = fs::read_to_string(&args[1])?;
     let instructions: Vec<&str> = code.split("\n").collect();
 
+    let stdin = io::stdin();
     let mut line_num: usize = 0;
     let mut variables: HashMap<&str, String> = HashMap::new();
     let mut labels: HashMap<&str, String> = HashMap::new();
@@ -92,6 +94,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         } else if line[0] == "print" {
             println!("{}", variables.get(line[1]).unwrap());
+
+        } else if line[0] == "read" {
+            let mut user_input = String::new();
+            stdin.read_line(&mut user_input)?;
+            variables.insert(line[1], user_input);
 
         } else {
             println!("error: this instruction does not exist");
