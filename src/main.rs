@@ -8,7 +8,7 @@ use std::process;
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
     let code: String = fs::read_to_string(&args[1])?;
-    let instructions: Vec<&str> = code.split("\n").collect();
+    let instructions: Vec<&str> = code.lines().collect();
 
     let stdin = io::stdin();
     let mut line_num: usize = 0;
@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             break;
         }
 
-        let line: Vec<&str> = instructions[line_num].split(" ").collect();
+        let line: Vec<&str> = instructions[line_num].split_whitespace().collect();
         if line[0] == "calculate" {
             let argument1: i32 = variables.get(line[1]).expect("REASON").parse().unwrap();
             let argument2: i32 = variables.get(line[3]).expect("REASON").parse().unwrap();
@@ -98,7 +98,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         } else if line[0] == "read" {
             let mut user_input = String::new();
             stdin.read_line(&mut user_input)?;
-            variables.insert(line[1], user_input);
+            variables.insert(line[1], user_input.split_whitespace().collect::<Vec<&str>>()[0].to_string());
 
         } else {
             println!("error: this instruction does not exist");
