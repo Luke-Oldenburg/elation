@@ -18,7 +18,29 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
 
         let line: Vec<&str> = instructions[line_num].split(" ").collect();
-        if line[0] == "data" {
+        if line[0] == "compare" {
+            let argument1: i32 = line[1].parse().unwrap();
+            let argument2: i32 = line[3].parse().unwrap();
+            if line[2] == "=" {
+                variables.insert(line[4], (argument1 ==argument2).to_string());
+
+            } else if line[2] == "!=" {
+                variables.insert(line[4], (argument1 !=argument2).to_string());
+
+            } else if line[2] == ">" {
+                variables.insert(line[4], (argument1 > argument2).to_string());
+
+            } else if line[2] == "<" {
+                variables.insert(line[4], (argument1 < argument2).to_string());
+
+            } else if line[2] == ">=" {
+                variables.insert(line[4], (argument1 >=argument2).to_string());
+
+            } else if line[2] == "<=" {
+                variables.insert(line[4], (argument1 <=argument2).to_string());
+            }
+
+        } else if line[0] == "data" {
             variables.insert(line[1], line[2].to_string());
 
         } else if line[0] == "exit" {
@@ -26,6 +48,19 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         } else if line[0] == "jump" {
             line_num = labels.get(line[1]).expect("REASON").parse().unwrap();
+
+        } else if line[0] == "jump_if" {
+            if variables.get(line[1]).expect("REASON").parse().unwrap() {
+                line_num = labels.get(line[2]).expect("REASON").parse().unwrap();
+            }
+
+        } else if line[0] == "jump_if_else" {
+            if variables.get(line[1]).expect("REASON").parse().unwrap() {
+                line_num = labels.get(line[2]).expect("REASON").parse().unwrap();
+
+            } else {
+                line_num = labels.get(line[3]).expect("REASON").parse().unwrap();
+            }
 
         } else if line[0] == "label" {
             labels.insert(line[1], line_num.to_string());

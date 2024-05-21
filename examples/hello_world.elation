@@ -3,4 +3,10 @@ data hello Hello
 data world World
 print hello
 print world
-jump hello_world
+label good_morning
+data good Good
+data morning Morning
+print good
+print morning
+data truthy true
+jump_if_else truthy hello_world good_morning
