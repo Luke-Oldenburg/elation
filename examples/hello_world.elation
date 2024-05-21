@@ -1,5 +1,6 @@
+label hello_world
 data hello Hello
 data world World
 print hello
 print world
-exit
+jump hello_world

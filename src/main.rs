@@ -10,7 +10,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let instructions: Vec<&str> = code.split("\n").collect();
 
     let mut line_num: usize = 0;
-    let mut variables: HashMap<&str, &str> = HashMap::new();
+    let mut variables: HashMap<&str, String> = HashMap::new();
+    let mut labels: HashMap<&str, String> = HashMap::new();
     loop {
         if line_num >= instructions.len() {
             break;
@@ -18,10 +19,16 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         let line: Vec<&str> = instructions[line_num].split(" ").collect();
         if line[0] == "data" {
-            variables.insert(line[1], line[2]);
+            variables.insert(line[1], line[2].to_string());
 
         } else if line[0] == "exit" {
             process::exit(0);
+
+        } else if line[0] == "jump" {
+            line_num = labels.get(line[1]).expect("REASON").parse().unwrap();
+
+        } else if line[0] == "label" {
+            labels.insert(line[1], line_num.to_string());
 
         } else if line[0] == "print" {
             println!("{}", variables.get(line[1]).unwrap());
