@@ -20,6 +20,20 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
 
         let line: Vec<&str> = instructions[line_num].split_whitespace().collect();
+        if line[0] == "label" {
+            labels.insert(line[1], line_num.to_string());
+        }
+
+        line_num += 1;
+    }
+
+    line_num = 0;
+    loop {
+        if line_num >= instructions.len() {
+            break;
+        }
+
+        let line: Vec<&str> = instructions[line_num].split_whitespace().collect();
         if line[0] == "calculate" {
             let argument1: i32 = variables.get(line[1]).expect("REASON").parse().unwrap();
             let argument2: i32 = variables.get(line[3]).expect("REASON").parse().unwrap();
@@ -90,7 +104,6 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
 
         } else if line[0] == "label" {
-            labels.insert(line[1], line_num.to_string());
 
         } else if line[0] == "print" {
             println!("{}", variables.get(line[1]).unwrap());
