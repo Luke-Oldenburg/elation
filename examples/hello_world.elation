@@ -1,28 +1,4 @@
-data six 6
-data seven 7
-compare six > seven result
-print result
-calculate six + seven result
-print result
-calculate six - seven result
-print result
-calculate six * seven result
-print result
-calculate six / seven result
-print result
-calculate six % seven result
-print result
-calculate six ^ seven result
-print result
-read input
-print input
-label hello_world
 data hello Hello
 data world World
 concat hello world hello_world
 print hello_world
-label good_morning
-data good Good
-data morning Morning
-concat good morning good_morning
-print good_morning
