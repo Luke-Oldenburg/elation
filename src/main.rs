@@ -40,6 +40,9 @@ fn main() -> Result<(), Box<dyn Error>> {
                 variables.insert(line[4], (argument1 <=argument2).to_string());
             }
 
+        } else if line[0] == "concat" {
+            variables.insert(line[3], variables.get(line[1]).unwrap().to_owned() + variables.get(line[2]).unwrap());
+
         } else if line[0] == "data" {
             variables.insert(line[1], line[2].to_string());
 
