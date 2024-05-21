@@ -8,3 +8,4 @@ print i
 calculate i + one i
 jump loop
 label end
+exit

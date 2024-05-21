@@ -34,3 +34,4 @@ print buzz
 calculate i + one i
 jump loop
 label end
+exit
