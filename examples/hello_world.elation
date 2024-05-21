@@ -1,3 +1,8 @@
+data two 2
+data one 1
+data result false
+compare two > one result
+print result
 label hello_world
 data hello Hello
 data world World
@@ -9,4 +14,3 @@ data morning Morning
 print good
 print morning
 data truthy true
-jump_if_else truthy hello_world good_morning
