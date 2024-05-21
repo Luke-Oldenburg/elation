@@ -19,9 +19,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         let line: Vec<&str> = instructions[line_num].split(" ").collect();
         if line[0] == "data" {
             variables.insert(line[1], line[2]);
-            
+
         } else if line[0] == "exit" {
             process::exit(0);
+
+        } else if line[0] == "print" {
+            println!("{}", variables.get(line[1]).unwrap());
 
         } else {
             println!("error: this instruction does not exist");
