@@ -57,31 +57,37 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
 
         } else if line[0] == "compare" {
-            let argument1: i32 = variables.get(line[1]).expect("REASON").parse().unwrap();
-            let argument2: i32 = variables.get(line[3]).expect("REASON").parse().unwrap();
-            if line[2] == "==" {
-                variables.insert(line[4], (argument1 == argument2).to_string());
+            if variables.get(line[1]).unwrap().eq("true") || variables.get(line[1]).unwrap().eq("false") || variables.get(line[3]).unwrap().eq("true") || variables.get(line[3]).unwrap().eq("false") {
+                let boolean1: bool = variables.get(line[1]).expect("REASON").parse().unwrap();
+                let boolean2: bool = variables.get(line[3]).expect("REASON").parse().unwrap();
+                if line[2] == "&&" {
+                    variables.insert(line[4], (boolean1 && boolean2).to_string());
 
-            } else if line[2] == "!=" {
-                variables.insert(line[4], (argument1 != argument2).to_string());
+                } else if line[2] == "||" {
+                    variables.insert(line[4], (boolean1 || boolean2).to_string());
+                }
 
-            } else if line[2] == ">" {
-                variables.insert(line[4], (argument1 > argument2).to_string());
+            } else {
+                let argument1: i32 = variables.get(line[1]).expect("REASON").parse().unwrap();
+                let argument2: i32 = variables.get(line[3]).expect("REASON").parse().unwrap();
+                if line[2] == "==" {
+                    variables.insert(line[4], (argument1 == argument2).to_string());
 
-            } else if line[2] == "<" {
-                variables.insert(line[4], (argument1 < argument2).to_string());
+                } else if line[2] == "!=" {
+                    variables.insert(line[4], (argument1 != argument2).to_string());
 
-            } else if line[2] == ">=" {
-                variables.insert(line[4], (argument1 >= argument2).to_string());
+                } else if line[2] == ">" {
+                    variables.insert(line[4], (argument1 > argument2).to_string());
 
-            } else if line[2] == "<=" {
-                variables.insert(line[4], (argument1 <= argument2).to_string());
+                } else if line[2] == "<" {
+                    variables.insert(line[4], (argument1 < argument2).to_string());
 
-            } else if line[2] == "&&" {
-                variables.insert(line[4], (argument1 && argument2).to_string());
+                } else if line[2] == ">=" {
+                    variables.insert(line[4], (argument1 >= argument2).to_string());
 
-            } else if line[2] == "||" {
-                variables.insert(line[4], (argument1 || argument2).to_string());
+                } else if line[2] == "<=" {
+                    variables.insert(line[4], (argument1 <= argument2).to_string());
+                }
             }
 
         } else if line[0] == "concat" {
