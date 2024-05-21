@@ -6,7 +6,10 @@ data one 1
 data three 3
 data five 5
 data i 1
+data max 100
 label loop
+compare i > max loop_over
+jump_if loop_over end
 calculate i % three remainder1
 compare remainder1 == zero three_divisible
 calculate i % five remainder2
@@ -30,3 +33,4 @@ label buzz
 print buzz
 calculate i + one i
 jump loop
+label end
