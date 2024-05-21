@@ -59,7 +59,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         } else if line[0] == "compare" {
             let argument1: i32 = variables.get(line[1]).expect("REASON").parse().unwrap();
             let argument2: i32 = variables.get(line[3]).expect("REASON").parse().unwrap();
-            if line[2] == "=" {
+            if line[2] == "==" {
                 variables.insert(line[4], (argument1 == argument2).to_string());
 
             } else if line[2] == "!=" {
@@ -76,6 +76,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 
             } else if line[2] == "<=" {
                 variables.insert(line[4], (argument1 <= argument2).to_string());
+
+            } else if line[2] == "&&" {
+                variables.insert(line[4], (argument1 && argument2).to_string());
+
+            } else if line[2] == "||" {
+                variables.insert(line[4], (argument1 || argument2).to_string());
             }
 
         } else if line[0] == "concat" {
