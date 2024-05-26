@@ -122,6 +122,9 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         } else if line[0] == "label" {
 
+        } else if line[0] == "move" {
+            variables.insert(line[2], variables.get(line[1]).expect("REASON").to_string());
+
         } else if line[0] == "print" {
             println!("{}", variables.get(line[1]).unwrap());
 
