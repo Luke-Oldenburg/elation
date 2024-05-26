@@ -100,6 +100,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         } else if line[0] == "exit" {
             process::exit(0);
 
+        } else if line[0] == "get_char" {
+            let index: usize = variables.get(line[2]).expect("REASON").parse().unwrap();
+            variables.insert(line[3], variables.get(line[1]).expect("REASON").as_bytes()[index].to_string());
+
         } else if line[0] == "jump" {
             line_num = labels.get(line[1]).expect("REASON").parse().unwrap();
 
@@ -125,6 +129,12 @@ fn main() -> Result<(), Box<dyn Error>> {
             let mut user_input = String::new();
             stdin.read_line(&mut user_input)?;
             variables.insert(line[1], user_input.split_whitespace().collect::<Vec<&str>>()[0].to_string());
+
+        } else if line[0] == "set_char" {
+            let index: usize = variables.get(line[2]).expect("REASON").parse().unwrap();
+            let mut bytes: Vec<u8> = variables.get(line[1]).expect("REASON").as_bytes().to_vec();
+            bytes[index] = variables.get(line[3]).expect("REASON").as_bytes()[0];
+            variables.insert(line[1], String::from_utf8(bytes).expect("REASON"));
 
         } else {
             println!("error: this instruction does not exist");
