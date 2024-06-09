@@ -17,7 +17,7 @@ This is a demo video on how to use some of the basic features of elation.
 Newlines separate instructions from each other and spaces separate the arguments provided on each line. Loops and if statements are made using jumps and labels. Values always have to be stored in a variable before being computed with. They cannot be passed directly to instructions as arguments.
 
 | instruction (argument0) | argument1 | argument2                          | argument3      | argument4 |
-|-------------------------|-----------|----------------------------------  |----------------|-----------|
+|-------------------------|-----------|------------------------------------|----------------|-----------|
 | calculate               | argument1 | operator (+ - * / % ^)             | argument2      | result    |
 | compare                 | argument1 | operator (&& \|\| == != > < >= <=) | argument2      | result    |
 | concat                  | argument1 | argument2                          | result         |           |
